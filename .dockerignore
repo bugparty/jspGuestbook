@@ -1,0 +1,44 @@
+# Compiled class files
+*.class
+web/WEB-INF/classes/
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Maven
+target/
+
+# Git
+.git/
+.gitignore
+
+# Database files (will be created at runtime)
+*.db
+*.sqlite
+*.sqlite3
+
+# Jetty distribution
+jetty-distribution-*/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README*.md
+.devcontainer/
+
+# Build scripts
+compile.sh
+run.sh
+
+# Test files
+test/

@@ -1,6 +1,8 @@
 # JSP Guestbook 留言板
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.x-blue.svg)](https://maven.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -8,6 +10,17 @@
 中文 | [English](README.md)
 
 这是一个使用 JSP/Servlet 技术开发的简单留言板应用，使用 SQLite 作为数据库。
+
+## 🚀 免费托管平台
+
+可以在以下平台免费部署在线演示：
+
+- **[Railway.app](https://railway.app)** - 最简单的部署方式，每月 $5 免费额度
+- **[Render.com](https://render.com)** - 每月 750 小时免费
+- **[Fly.io](https://fly.io)** - 慷慨的免费额度，支持持久化存储
+- **[Google Cloud Run](https://cloud.google.com/run)** - 每月 200 万次请求免费
+
+📖 **[完整部署指南 →](DEPLOYMENT.md)**
 
 ## 项目现代化改造
 

@@ -1,6 +1,8 @@
 # JSP Guestbook
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.x-blue.svg)](https://maven.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -8,6 +10,17 @@
 [中文文档](README_CN.md) | English
 
 A simple guestbook web application built with JSP/Servlet and SQLite database.
+
+## 🚀 Free Hosting Options
+
+Deploy a live demo for free on these platforms:
+
+- **[Railway.app](https://railway.app)** - Easiest deployment, $5/month free credit
+- **[Render.com](https://render.com)** - 750 hours/month free tier
+- **[Fly.io](https://fly.io)** - Generous free tier with persistent storage
+- **[Google Cloud Run](https://cloud.google.com/run)** - 2M requests/month free
+
+📖 **[Complete Deployment Guide →](DEPLOYMENT.md)**
 
 ## Project Modernization
 

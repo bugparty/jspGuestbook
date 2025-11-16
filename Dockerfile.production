@@ -1,0 +1,52 @@
+# Multi-stage Dockerfile for production deployment
+# Suitable for Fly.io, Google Cloud Run, Azure, etc.
+
+# Build stage
+FROM maven:3.9-eclipse-temurin-21-alpine AS builder
+
+WORKDIR /app
+
+# Copy pom.xml and download dependencies (for better caching)
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy source code
+COPY src ./src
+COPY web ./web
+COPY lib ./lib
+
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Download Jetty Runner
+RUN wget -q https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.4.51.v20230217/jetty-runner-9.4.51.v20230217.jar -O jetty-runner.jar
+
+# Runtime stage
+FROM eclipse-temurin:21-jre-alpine
+
+WORKDIR /app
+
+# Install SQLite
+RUN apk add --no-cache sqlite
+
+# Copy built application from builder
+COPY --from=builder /app/web ./web
+COPY --from=builder /app/jetty-runner.jar ./jetty-runner.jar
+
+# Create data directory for database
+RUN mkdir -p /app/data && \
+    chmod 777 /app/data
+
+# Set environment variables
+ENV DB_PATH=/app/data/guestbook.db
+ENV PORT=8080
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/guestbook/ || exit 1
+
+# Start the application
+CMD ["sh", "-c", "java -Ddb.path=${DB_PATH} -jar jetty-runner.jar --port ${PORT} web"]
