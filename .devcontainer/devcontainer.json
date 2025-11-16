@@ -1,0 +1,63 @@
+{
+  "name": "JSP Guestbook Dev Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  // Configure tool-specific properties
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.server.launchMode": "Standard",
+        "maven.executable.path": "/usr/bin/mvn",
+        "java.home": "/usr/lib/jvm/java-21-openjdk-amd64",
+        "files.exclude": {
+          "**/.classpath": true,
+          "**/.project": true,
+          "**/.settings": true,
+          "**/.factorypath": true
+        }
+      },
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-maven",
+        "redhat.java",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-test",
+        "vscjava.vscode-java-dependency",
+        "redhat.vscode-xml"
+      ]
+    }
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Guestbook Application",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Use 'postCreateCommand' to run commands after the container is created
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  // Use 'postStartCommand' to run commands after the container starts
+  "postStartCommand": "echo '🚀 Ready! Run ./run.sh to start the application'",
+
+  // Comment out to connect as root instead
+  "remoteUser": "vscode",
+
+  // Set environment variables
+  "remoteEnv": {
+    "JAVA_HOME": "/usr/lib/jvm/java-21-openjdk-amd64",
+    "MAVEN_HOME": "/usr/share/maven"
+  },
+
+  // Features to add to the dev container
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  }
+}

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: jsp-guestbook
+    env: java
+    buildCommand: mvn clean package -DskipTests && wget -q https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-runner/9.4.51.v20230217/jetty-runner-9.4.51.v20230217.jar -O jetty-runner.jar
+    startCommand: java -Ddb.path=/opt/render/project/src/guestbook.db -jar jetty-runner.jar --port $PORT web
+    envVars:
+      - key: JAVA_VERSION
+        value: "21"
+      - key: MAVEN_VERSION
+        value: "3.9"
+    disk:
+      name: guestbook-data
+      mountPath: /opt/render/project/src
+      sizeGB: 1

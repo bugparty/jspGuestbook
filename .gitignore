@@ -1,0 +1,65 @@
+# Compiled class files
+*.class
+web/WEB-INF/classes/
+
+# Log files
+*.log
+
+# Package Files
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Keep library JARs and servlet-api
+!lib/*.jar
+!web/WEB-INF/lib/servlet-api.jar
+
+# IDE specific files (keep .vscode/ for DevContainer)
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+*.swp
+*.bak
+
+# VS Code workspace files
+*.code-workspace
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Jetty
+jetty-distribution-*/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS specific files
+.DS_Store
+Thumbs.db
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build output
+build/
+dist/
+out/

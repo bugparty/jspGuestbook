@@ -1,0 +1,78 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile Project",
+      "type": "shell",
+      "command": "./compile.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Application",
+      "type": "shell",
+      "command": "./run.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Run with Maven Jetty",
+      "type": "shell",
+      "command": "mvn jetty:run",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Clean Build",
+      "type": "shell",
+      "command": "rm -rf web/WEB-INF/classes/* && ./compile.sh",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Maven Clean Package",
+      "type": "shell",
+      "command": "mvn clean package",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "View Database",
+      "type": "shell",
+      "command": "sqlite3 ~/guestbook.db",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
