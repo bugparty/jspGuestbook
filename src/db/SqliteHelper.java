@@ -10,14 +10,29 @@ import Exception.SqliteError;
  */
 public class SqliteHelper {
     private static Connection c = null;
+    private static String DB_PATH = null;
+
+    static {
+        // Get database path - use system property or default to current directory
+        String dbPath = System.getProperty("db.path");
+        if (dbPath == null || dbPath.isEmpty()) {
+            // Default to project root or user home directory
+            String userHome = System.getProperty("user.home");
+            DB_PATH = userHome + "/guestbook.db";
+        } else {
+            DB_PATH = dbPath;
+        }
+        System.out.println("Using database at: " + DB_PATH);
+    }
+
     public static Connection getConn() throws SqliteError {
         try{
         if(c == null){
         Class.forName("org.sqlite.JDBC");
-        c = DriverManager.getConnection("jdbc:sqlite:D:/test.db");
+        c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
         }
         if(c.isClosed())
-            c = DriverManager.getConnection("jdbc:sqlite:D:/test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:" + DB_PATH);
         }catch (Exception e){
             throw new SqliteError("No slqlite driver found",e);
         }
