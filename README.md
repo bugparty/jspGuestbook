@@ -1,200 +1,202 @@
-# JSP Guestbook 留言板
+# JSP Guestbook
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main)
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/)
 [![Maven](https://img.shields.io/badge/Maven-3.x-blue.svg)](https://maven.apache.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-这是一个使用 JSP/Servlet 技术开发的简单留言板应用，使用 SQLite 作为数据库。
+[中文文档](README_CN.md) | English
 
-## 项目现代化改造
+A simple guestbook web application built with JSP/Servlet and SQLite database.
 
-本项目已经从老旧的 IDE 项目升级为可独立运行的现代化 Web 应用：
+## Project Modernization
 
-### 主要改进
+This project has been upgraded from a legacy IDE-based project to a modern, standalone web application:
 
-1. **添加 DevContainer 支持** - 支持 GitHub Codespaces 和 VS Code Remote Containers，云端开发零配置
-2. **添加 Maven 构建支持** - 创建了 `pom.xml`，可以使用 Maven 进行依赖管理和构建
-3. **修复数据库路径** - 将硬编码的 Windows 路径改为跨平台的动态路径
-4. **创建编译脚本** - 提供独立的编译脚本，无需 IDE
-5. **创建运行脚本** - 一键启动应用的便捷脚本
-6. **VS Code 集成** - 预配置的任务和调试配置
+### Key Improvements
 
-## 快速开始
+1. **DevContainer Support** - Zero-config cloud development with GitHub Codespaces and VS Code Remote Containers
+2. **Maven Build Support** - Added `pom.xml` for dependency management and builds
+3. **Cross-platform Database Path** - Fixed hardcoded Windows path to dynamic, cross-platform path
+4. **Compilation Script** - Standalone compilation without IDE
+5. **Run Script** - One-command application startup
+6. **VS Code Integration** - Pre-configured tasks and debug configurations
 
-### 方法一：在云端开发（推荐）☁️
+## Quick Start
 
-使用 GitHub Codespaces 或 VS Code Remote Containers，零配置即可开始开发：
+### Option 1: Cloud Development (Recommended) ☁️
+
+Use GitHub Codespaces or VS Code Remote Containers for zero-configuration development:
 
 **GitHub Codespaces:**
-1. 点击仓库页面的 "Code" 按钮
-2. 选择 "Codespaces" → "Create codespace"
-3. 等待容器构建完成（自动编译项目）
-4. 运行 `./run.sh` 启动应用
-5. 点击端口转发通知打开浏览器
+1. Click the "Code" button on the repository page
+2. Select "Codespaces" → "Create codespace"
+3. Wait for container to build (auto-compiles the project)
+4. Run `./run.sh` to start the application
+5. Click the port forwarding notification to open in browser
 
 **VS Code Remote Containers:**
-1. 安装 Docker Desktop 和 Remote Containers 扩展
-2. 在 VS Code 中打开项目
-3. 按 `F1` → "Remote-Containers: Reopen in Container"
-4. 容器启动后运行 `./run.sh`
+1. Install Docker Desktop and Remote Containers extension
+2. Open the project in VS Code
+3. Press `F1` → "Remote-Containers: Reopen in Container"
+4. After container starts, run `./run.sh`
 
-详细说明请查看 [DevContainer 文档](.devcontainer/README.md)
+For detailed instructions, see [DevContainer Documentation](.devcontainer/README.md)
 
-### 方法二：使用运行脚本
+### Option 2: Using Run Script
 
-这是最简单的本地运行方式，脚本会自动下载 Jetty 服务器并启动应用：
+The simplest local method - script automatically downloads Jetty server and starts the application:
 
 ```bash
 ./run.sh
 ```
 
-然后访问：http://localhost:8080/guestbook/
+Then visit: http://localhost:8080/guestbook/
 
-### 方法三：手动编译和部署
+### Option 3: Manual Compilation and Deployment
 
-#### 1. 编译项目
+#### 1. Compile Project
 
 ```bash
 ./compile.sh
 ```
 
-或使用 Maven：
+Or using Maven:
 
 ```bash
 mvn clean package
 ```
 
-#### 2. 部署到 Servlet 容器
+#### 2. Deploy to Servlet Container
 
-将 `web` 目录部署到任何 Servlet 3.0+ 容器（如 Tomcat、Jetty）：
+Deploy the `web` directory to any Servlet 3.0+ container (e.g., Tomcat, Jetty):
 
-**使用 Tomcat:**
+**Using Tomcat:**
 ```bash
-# 将 web 目录复制到 Tomcat 的 webapps 目录
+# Copy web directory to Tomcat's webapps directory
 cp -r web $TOMCAT_HOME/webapps/guestbook
-# 启动 Tomcat
+# Start Tomcat
 $TOMCAT_HOME/bin/catalina.sh run
 ```
 
-**使用 Maven Jetty 插件:**
+**Using Maven Jetty Plugin:**
 ```bash
 mvn jetty:run
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 jspGuestbook/
-├── src/                      # Java 源代码
-│   ├── control/             # Servlet 控制器
-│   ├── db/                  # 数据库访问层
-│   ├── model/               # 数据模型
-│   └── Exception/           # 自定义异常
-├── web/                     # Web 资源
+├── src/                      # Java source code
+│   ├── control/             # Servlet controllers
+│   ├── db/                  # Database access layer
+│   ├── model/               # Data models
+│   └── Exception/           # Custom exceptions
+├── web/                     # Web resources
 │   ├── WEB-INF/
-│   │   ├── web.xml         # Web 应用配置
-│   │   ├── classes/        # 编译后的类文件
-│   │   └── lib/            # 依赖库
-│   ├── css/                # 样式文件
-│   ├── js/                 # JavaScript 文件
-│   ├── fonts/              # 字体文件
-│   └── *.jsp               # JSP 页面
-├── lib/                     # 项目依赖库
-├── test/                    # 测试代码
-├── pom.xml                  # Maven 配置
-├── compile.sh              # 编译脚本
-└── run.sh                  # 运行脚本
+│   │   ├── web.xml         # Web application configuration
+│   │   ├── classes/        # Compiled class files
+│   │   └── lib/            # Dependency libraries
+│   ├── css/                # Stylesheets
+│   ├── js/                 # JavaScript files
+│   ├── fonts/              # Font files
+│   └── *.jsp               # JSP pages
+├── lib/                     # Project dependencies
+├── test/                    # Test code
+├── pom.xml                  # Maven configuration
+├── compile.sh              # Compilation script
+└── run.sh                  # Run script
 ```
 
-## 技术栈
+## Technology Stack
 
-- **Java**: 1.8+（兼容 Java 21）
+- **Java**: 1.8+ (compatible with Java 21)
 - **Servlet API**: 3.1
 - **JSP**: 2.3
-- **数据库**: SQLite 3.x
-- **构建工具**: Maven 3.x
-- **测试框架**: JUnit 4.x
+- **Database**: SQLite 3.x
+- **Build Tool**: Maven 3.x
+- **Testing**: JUnit 4.x
 
-## 数据库配置
+## Database Configuration
 
-应用使用 SQLite 数据库，默认路径为 `~/guestbook.db`（用户主目录）。
+The application uses SQLite database with default path `~/guestbook.db` (user home directory).
 
-### 自定义数据库路径
+### Custom Database Path
 
-可以通过 Java 系统属性指定数据库路径：
+You can specify the database path using Java system property:
 
 ```bash
 java -Ddb.path=/path/to/your/database.db -jar ...
 ```
 
-或在启动脚本中设置：
+Or set it in the startup script:
 
 ```bash
 export JAVA_OPTIONS="-Ddb.path=./data/guestbook.db"
 ./run.sh
 ```
 
-## 功能特性
+## Features
 
-- 用户注册和登录
-- 发布留言/笔记
-- 查看所有留言
-- 简洁的 Bootstrap 界面
+- User registration and login
+- Post messages/notes
+- View all messages
+- Clean Bootstrap UI
 
-## 开发说明
+## Development Guide
 
-### 编译要求
+### Build Requirements
 
-- JDK 1.8 或更高版本
-- Maven 3.x（可选）
-- Servlet 容器（Tomcat 7+、Jetty 9+ 等）
+- JDK 1.8 or higher
+- Maven 3.x (optional)
+- Servlet container (Tomcat 7+, Jetty 9+, etc.)
 
-### 修改后重新编译
+### Recompile After Changes
 
 ```bash
-# 清理旧的编译文件
+# Clean old compiled files
 rm -rf web/WEB-INF/classes/*
 
-# 重新编译
+# Recompile
 ./compile.sh
 ```
 
-## 故障排除
+## Troubleshooting
 
-### 编译错误
+### Compilation Errors
 
-如果遇到 `servlet-api` 找不到的错误，编译脚本会自动下载。如果下载失败，可以手动下载：
+If you encounter `servlet-api` not found error, the compilation script will download it automatically. If download fails, manually download:
 
 ```bash
 wget https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar \
   -O web/WEB-INF/lib/servlet-api.jar
 ```
 
-### 数据库连接错误
+### Database Connection Errors
 
-检查数据库文件路径和权限：
+Check database file path and permissions:
 
 ```bash
 ls -la ~/guestbook.db
 ```
 
-如果数据库不存在，应用会自动创建表结构。
+If the database doesn't exist, the application will automatically create the table structure.
 
-### 端口冲突
+### Port Conflicts
 
-如果 8080 端口被占用，可以修改 `run.sh` 中的端口配置，或使用其他端口启动：
+If port 8080 is occupied, you can modify the port configuration in `run.sh`, or start with a different port:
 
 ```bash
-# 编辑 pom.xml 修改 Jetty 插件的端口配置
-# 或直接指定端口
+# Edit pom.xml to modify Jetty plugin port configuration
+# Or specify port directly
 mvn jetty:run -Djetty.http.port=9090
 ```
 
-## 许可证
+## License
 
-本项目仅供学习和参考使用。
+This project is for educational and reference purposes only.
 
-## 贡献
+## Contributing
 
-欢迎提交 Issue 和 Pull Request！
+Issues and Pull Requests are welcome!
