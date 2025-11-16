@@ -6,7 +6,6 @@ web/WEB-INF/classes/
 *.log
 
 # Package Files
-*.jar
 *.war
 *.nar
 *.ear
@@ -14,7 +13,11 @@ web/WEB-INF/classes/
 *.tar.gz
 *.rar
 
-# IDE specific files
+# Keep library JARs and servlet-api
+!lib/*.jar
+!web/WEB-INF/lib/servlet-api.jar
+
+# IDE specific files (keep .vscode/ for DevContainer)
 .idea/
 *.iml
 *.iws
@@ -23,6 +26,9 @@ web/WEB-INF/classes/
 .settings/
 *.swp
 *.bak
+
+# VS Code workspace files
+*.code-workspace
 
 # Maven
 target/

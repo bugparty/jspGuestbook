@@ -1,5 +1,10 @@
 # JSP Guestbook 留言板
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main)
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/)
+[![Maven](https://img.shields.io/badge/Maven-3.x-blue.svg)](https://maven.apache.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 这是一个使用 JSP/Servlet 技术开发的简单留言板应用，使用 SQLite 作为数据库。
 
 ## 项目现代化改造
@@ -8,16 +13,37 @@
 
 ### 主要改进
 
-1. **添加 Maven 构建支持** - 创建了 `pom.xml`，可以使用 Maven 进行依赖管理和构建
-2. **修复数据库路径** - 将硬编码的 Windows 路径改为跨平台的动态路径
-3. **创建编译脚本** - 提供独立的编译脚本，无需 IDE
-4. **创建运行脚本** - 一键启动应用的便捷脚本
+1. **添加 DevContainer 支持** - 支持 GitHub Codespaces 和 VS Code Remote Containers，云端开发零配置
+2. **添加 Maven 构建支持** - 创建了 `pom.xml`，可以使用 Maven 进行依赖管理和构建
+3. **修复数据库路径** - 将硬编码的 Windows 路径改为跨平台的动态路径
+4. **创建编译脚本** - 提供独立的编译脚本，无需 IDE
+5. **创建运行脚本** - 一键启动应用的便捷脚本
+6. **VS Code 集成** - 预配置的任务和调试配置
 
 ## 快速开始
 
-### 方法一：使用运行脚本（推荐）
+### 方法一：在云端开发（推荐）☁️
 
-这是最简单的方式，脚本会自动下载 Jetty 服务器并启动应用：
+使用 GitHub Codespaces 或 VS Code Remote Containers，零配置即可开始开发：
+
+**GitHub Codespaces:**
+1. 点击仓库页面的 "Code" 按钮
+2. 选择 "Codespaces" → "Create codespace"
+3. 等待容器构建完成（自动编译项目）
+4. 运行 `./run.sh` 启动应用
+5. 点击端口转发通知打开浏览器
+
+**VS Code Remote Containers:**
+1. 安装 Docker Desktop 和 Remote Containers 扩展
+2. 在 VS Code 中打开项目
+3. 按 `F1` → "Remote-Containers: Reopen in Container"
+4. 容器启动后运行 `./run.sh`
+
+详细说明请查看 [DevContainer 文档](.devcontainer/README.md)
+
+### 方法二：使用运行脚本
+
+这是最简单的本地运行方式，脚本会自动下载 Jetty 服务器并启动应用：
 
 ```bash
 ./run.sh
@@ -25,7 +51,7 @@
 
 然后访问：http://localhost:8080/guestbook/
 
-### 方法二：手动编译和部署
+### 方法三：手动编译和部署
 
 #### 1. 编译项目
 

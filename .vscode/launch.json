@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Run with Jetty (Maven)",
+      "request": "launch",
+      "mainClass": "",
+      "preLaunchTask": "Run with Maven Jetty"
+    }
+  ]
+}
